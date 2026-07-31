@@ -1,0 +1,44 @@
+# ===== أسرار — لا ترفع أبداً =====
+.credentials.json
+*.key
+*.pem
+.env
+.env.*
+session-env/
+
+# ===== حالة خاصة بالجهاز (لا تُزامَن) =====
+cache/
+telemetry/
+downloads/
+backups/
+sessions/
+history.jsonl
+.last-cleanup
+.last-update-result.json
+mcp-needs-auth-cache.json
+settings.local.json
+nul
+
+# ===== جلسات المشاريع (ضخمة) — لكن احتفظ بالذاكرة =====
+projects/**
+!projects/**/
+!projects/**/memory/**
+
+# ===== مستودعات مستنسخة داخل .claude (لها git خاص بها) =====
+/ECC/
+/ECC-fresh/
+/agent-browser/
+/agent-skills/
+/awesome-mcp-servers/
+/claude-plugins-official/
+/open-notebook/
+/headroom/
+/Understand-Anything/
+/last30days-skill/
+/plugins/repos/
+/plugins/cache/
+/plugins/marketplaces/
+
+# ===== نظام التشغيل =====
+Thumbs.db
+.DS_Store

@@ -1,0 +1,45 @@
+{
+  "apiKeyHelper": "\"C:\\Users\\yazot\\AppData\\Roaming\\claude-code-router\\bin\\ccr-claude-code-api-key-default-claude-code.cmd\"",
+  "env": {
+    "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:3456",
+    "ANTHROPIC_API_BASE_URL": "http://127.0.0.1:3456",
+    "CLAUDE_AGENT_API_BASE_URL": "http://127.0.0.1:3456",
+    "ANTHROPIC_MODEL": "OpenCode Public (Chat Completions)/deepseek-v4-flash-free",
+    "CCR_CLAUDE_CODE_MODEL": "OpenCode Public (Chat Completions)/deepseek-v4-flash-free",
+    "CODEXL_CLAUDE_CODE_MODEL": "OpenCode Public (Chat Completions)/deepseek-v4-flash-free"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Users\\yazot\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\headroom.exe proxy --port 8787 --no-telemetry --detach 2>nul || exit 0",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "C:\\Users\\yazot\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\headroom.exe init hook ensure",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "headroom init hook ensure",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  },
+  "autoUpdatesChannel": "latest",
+  "theme": "dark"
+}
