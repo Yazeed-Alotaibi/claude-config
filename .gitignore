@@ -39,6 +39,10 @@ projects/**
 /plugins/cache/
 /plugins/marketplaces/
 
+# ===== ملفات وقت التشغيل لأدوات مساعدة (خاصة بالجهاز) =====
+.serena/
+shell-snapshots/
+
 # ===== نظام التشغيل =====
 Thumbs.db
 .DS_Store
