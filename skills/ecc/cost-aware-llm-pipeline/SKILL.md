@@ -22,8 +22,8 @@ Patterns for controlling LLM API costs while maintaining quality. Combines model
 Automatically select cheaper models for simple tasks, reserving expensive models for complex ones.
 
 ```python
-MODEL_SONNET = "claude-sonnet-4-6"
-MODEL_HAIKU = "claude-haiku-4-5-20251001"
+MODEL_SONNET = "claude-sonnet-5"
+MODEL_HAIKU = "claude-haiku-4-5"
 
 _SONNET_TEXT_THRESHOLD = 10_000  # chars
 _SONNET_ITEM_THRESHOLD = 30     # items
@@ -38,7 +38,7 @@ def select_model(
         return force_model
     if text_length >= _SONNET_TEXT_THRESHOLD or item_count >= _SONNET_ITEM_THRESHOLD:
         return MODEL_SONNET  # Complex task
-    return MODEL_HAIKU  # Simple task (3-4x cheaper)
+    return MODEL_HAIKU  # Simple task (~3x cheaper)
 ```
 
 ### 2. Immutable Cost Tracking
@@ -151,20 +151,24 @@ def process(text: str, config: Config, tracker: CostTracker) -> tuple[Result, Co
     return parse_result(response), tracker
 ```
 
-## Pricing Reference (2025-2026)
+## Pricing Reference (2026)
 
 | Model | Input ($/1M tokens) | Output ($/1M tokens) | Relative Cost |
 |-------|---------------------|----------------------|---------------|
-| Haiku 4.5 | $0.80 | $4.00 | 1x |
-| Sonnet 4.6 | $3.00 | $15.00 | ~4x |
-| Opus 4.5 | $15.00 | $75.00 | ~19x |
+| Haiku 4.5 (`claude-haiku-4-5`) | $1.00 | $5.00 | 1x |
+| Sonnet 5 (`claude-sonnet-5`) | $3.00 | $15.00 | ~3x |
+| Opus 5 (`claude-opus-5`) | $5.00 | $25.00 | ~5x |
+| Fable 5 (`claude-fable-5`) | $10.00 | $50.00 | ~10x |
+
+Prices change — confirm against the current pricing docs before relying on them
+for budget math.
 
 ## Best Practices
 
 - **Start with the cheapest model** and only route to expensive models when complexity thresholds are met
 - **Set explicit budget limits** before processing batches — fail early rather than overspend
 - **Log model selection decisions** so you can tune thresholds based on real data
-- **Use prompt caching** for system prompts over 1024 tokens — saves both cost and latency
+- **Use prompt caching** for long, stable system prompts — saves both cost and latency. The minimum cacheable prefix is model-dependent (512 tokens on Opus 5 / Fable 5, 1024 on Sonnet 5, higher on older models); below it, caching silently no-ops
 - **Never retry on authentication or validation errors** — only transient failures (network, rate limit, server error)
 
 ## Anti-Patterns to Avoid

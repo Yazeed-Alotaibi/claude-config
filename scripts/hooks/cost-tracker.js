@@ -28,8 +28,8 @@
  *   prefers that authoritative value over the transcript-sum estimate when
  *   the cache is fresh (≤ 300s). The transcript-sum is kept as a safe
  *   fallback because:
- *     - the hard-coded rate table cannot represent Opus 4.7's >200K-token
- *       2x tier or the 1h-cache 2x tier (under-counts on long sessions);
+ *     - the hard-coded rate table cannot represent the 1h-cache 2x write tier
+ *       or fast-mode pricing (under-counts on long sessions);
  *     - summing the full transcript double-counts work done across
  *       `--resume` boundaries while `cost.total_cost_usd` is per-process.
  *   Absent a writer, behavior is unchanged.
@@ -68,17 +68,19 @@ function readHarnessCost(sessionId, maxAgeSeconds) {
   }
 }
 
-// Approximate per-1M-token billing rates (USD).
+// Approximate per-1M-token billing rates (USD), Claude 5 family.
 // Cache creation: 1.25x input rate. Cache read: 0.1x input rate.
 const RATE_TABLE = {
-  haiku:  { in: 0.80,  out: 4.0,  cacheWrite: 1.00,  cacheRead: 0.08 },
+  haiku:  { in: 1.00,  out: 5.0,  cacheWrite: 1.25,  cacheRead: 0.10 },
   sonnet: { in: 3.00,  out: 15.0, cacheWrite: 3.75,  cacheRead: 0.30 },
-  opus:   { in: 15.00, out: 75.0, cacheWrite: 18.75, cacheRead: 1.50 }
+  opus:   { in: 5.00,  out: 25.0, cacheWrite: 6.25,  cacheRead: 0.50 },
+  fable:  { in: 10.00, out: 50.0, cacheWrite: 12.50, cacheRead: 1.00 }
 };
 
 function getRates(model) {
   const m = String(model || '').toLowerCase();
   if (m.includes('haiku')) return RATE_TABLE.haiku;
+  if (m.includes('fable') || m.includes('mythos')) return RATE_TABLE.fable;
   if (m.includes('opus'))  return RATE_TABLE.opus;
   return RATE_TABLE.sonnet;
 }

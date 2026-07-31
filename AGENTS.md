@@ -1,6 +1,6 @@
 # Everything Claude Code (ECC) — Agent Instructions
 
-This is a **production-ready AI coding plugin** providing 63 specialized agents, 251 skills, 79 commands, and automated hook workflows for software development.
+This is a **production-ready AI coding plugin** providing 65 specialized agents, 198 skills, 79 commands, and automated hook workflows for software development.
 
 **Version:** 2.0.0-rc.1
 
@@ -14,38 +14,113 @@ This is a **production-ready AI coding plugin** providing 63 specialized agents,
 
 ## Available Agents
 
+All 65 agents live in `agents/`. Each file's frontmatter is the source of truth
+for its trigger conditions; the tables below are a navigation index.
+
+### Planning and architecture
+
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
 | planner | Implementation planning | Complex features, refactoring |
 | architect | System design and scalability | Architectural decisions |
-| tdd-guide | Test-driven development | New features, bug fixes |
+| code-architect | Feature blueprints from existing codebase patterns | Before implementing a feature in an established codebase |
+| code-explorer | Traces execution paths and maps architecture layers | Understanding an unfamiliar feature before changing it |
+| a11y-architect | WCAG 2.2 accessibility for web and native | Designing UI components, design systems, a11y audits |
+| homelab-architect | Home/small-lab network plans | Staged network changes with rollback guidance |
+| network-architect | Enterprise/multi-site network architecture | Network design from requirements |
+
+### Code review and quality
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
 | code-reviewer | Code quality and maintainability | After writing/modifying code |
 | security-reviewer | Vulnerability detection | Before commits, sensitive code |
-| build-error-resolver | Fix build/type errors | When build fails |
-| e2e-runner | End-to-end Playwright testing | Critical user flows |
+| code-simplifier | Clarity and consistency without behavior change | Recently modified code |
+| comment-analyzer | Comment accuracy and comment-rot risk | Doc-heavy or long-lived code |
+| silent-failure-hunter | Swallowed errors, bad fallbacks, missing propagation | Error-handling review |
+| type-design-analyzer | Encapsulation, invariants, enforcement | Type/API design review |
+| pr-test-analyzer | PR test coverage quality and completeness | Reviewing a pull request |
+| performance-optimizer | Bottlenecks, bundle size, runtime performance | Profiling, memory leaks, render optimization |
 | refactor-cleaner | Dead code cleanup | Code maintenance |
 | doc-updater | Documentation and codemaps | Updating docs |
-| cpp-reviewer | C/C++ code review | C and C++ projects |
-| cpp-build-resolver | C/C++ build errors | C and C++ build failures |
-| fsharp-reviewer | F# functional code review | F# projects |
 | docs-lookup | Documentation lookup via Context7 | API/docs questions |
-| go-reviewer | Go code review | Go projects |
-| go-build-resolver | Go build errors | Go build failures |
-| kotlin-reviewer | Kotlin code review | Kotlin/Android/KMP projects |
-| kotlin-build-resolver | Kotlin/Gradle build errors | Kotlin build failures |
-| database-reviewer | PostgreSQL/Supabase specialist | Schema design, query optimization |
+
+### Language and framework reviewers
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| typescript-reviewer | TypeScript/JavaScript code review | TypeScript/JavaScript projects |
+| react-reviewer | Hooks, render perf, server/client boundaries | Any `.tsx`/`.jsx` change |
 | python-reviewer | Python code review | Python projects |
 | django-reviewer | Django code review | Django apps, DRF APIs, ORM, migrations |
-| django-build-resolver | Django build, migration, and setup errors | Django startup, dependency, migration, collectstatic failures |
+| fastapi-reviewer | Async correctness, DI, Pydantic, OpenAPI | FastAPI applications |
 | java-reviewer | Java and Spring Boot code review | Java/Spring Boot projects |
+| kotlin-reviewer | Kotlin code review | Kotlin/Android/KMP projects |
+| go-reviewer | Go code review | Go projects |
+| rust-reviewer | Rust code review | Rust projects |
+| swift-reviewer | Protocol-oriented design, ARC, Swift Concurrency | Swift projects |
+| csharp-reviewer | .NET conventions, async, nullable reference types | C# projects |
+| cpp-reviewer | C/C++ code review | C and C++ projects |
+| fsharp-reviewer | F# functional code review | F# projects |
+| flutter-reviewer | Widget patterns, state management, Dart idioms | Flutter projects |
+| harmonyos-app-resolver | ArkTS/ArkUI review and fixes | HarmonyOS/OpenHarmony projects |
+| database-reviewer | PostgreSQL/Supabase specialist | Schema design, query optimization |
+| mle-reviewer | Production ML pipeline review | ML pipelines, evals, serving, monitoring, rollback |
+| healthcare-reviewer | Clinical safety, CDSS accuracy, PHI compliance | EMR/EHR and health information systems |
+| network-config-reviewer | Router/switch config security and correctness | Network config changes |
+
+### Build and test
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| build-error-resolver | Fix build/type errors | When build fails |
+| react-build-resolver | Vite/webpack/Next.js/CRA/Parcel/esbuild/Bun failures | React build failures |
 | java-build-resolver | Java/Maven/Gradle build errors | Java build failures |
+| kotlin-build-resolver | Kotlin/Gradle build errors | Kotlin build failures |
+| go-build-resolver | Go build errors | Go build failures |
+| rust-build-resolver | Rust build errors | Rust build failures |
+| swift-build-resolver | Swift/Xcode/SPM/code signing errors | Swift build failures |
+| dart-build-resolver | `dart analyze`, pub, build_runner errors | Dart/Flutter build failures |
+| cpp-build-resolver | C/C++ build errors | C and C++ build failures |
+| django-build-resolver | Django startup, dependency, migration, collectstatic failures | Django build failures |
+| pytorch-build-resolver | PyTorch runtime/CUDA/training errors | PyTorch build/training failures |
+| tdd-guide | Test-driven development | New features, bug fixes |
+| e2e-runner | End-to-end Playwright testing | Critical user flows |
+
+### Operations and orchestration
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
 | loop-operator | Autonomous loop execution | Run loops safely, monitor stalls, intervene |
 | harness-optimizer | Harness config tuning | Reliability, cost, throughput |
-| rust-reviewer | Rust code review | Rust projects |
-| rust-build-resolver | Rust build errors | Rust build failures |
-| pytorch-build-resolver | PyTorch runtime/CUDA/training errors | PyTorch build/training failures |
-| mle-reviewer | Production ML pipeline review | ML pipelines, evals, serving, monitoring, rollback |
-| typescript-reviewer | TypeScript/JavaScript code review | TypeScript/JavaScript projects |
+| conversation-analyzer | Find behaviors worth preventing with hooks | `/hookify` without arguments |
+| network-troubleshooter | Read-only OSI-layer diagnosis | Connectivity, routing, DNS, policy symptoms |
+| chief-of-staff | Multi-channel comms triage and draft replies | Email/Slack/LINE/Messenger workflows |
+| free-worker | Bulk mechanical work on a free OpenRouter model | High-volume work where quality matters less than cost |
+| cheap-worker | Substantive non-critical work at ~1-2% of Claude cost | Bulk refactors, first drafts, test scaffolding |
+
+### GAN harness (iterative build/evaluate loop)
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| gan-planner | Expands a one-line prompt into a full spec | Start of a GAN run |
+| gan-generator | Implements against the spec, iterates on feedback | GAN build phase |
+| gan-evaluator | Tests the live app via Playwright, scores vs rubric | GAN evaluation phase |
+
+### Open-source pipeline
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| opensource-forker | Fork, strip secrets, replace internal references | Stage 1 of `opensource-pipeline` |
+| opensource-sanitizer | Verify sanitization, PASS/FAIL report | Stage 2 — before any public release |
+| opensource-packager | Generate CLAUDE.md, README, LICENSE, templates | Stage 3 of `opensource-pipeline` |
+
+### Growth
+
+| Agent | Purpose | When to Use |
+|-------|---------|-------------|
+| marketing-agent | Campaign planning, positioning, copy | Product launches and marketing campaigns |
+| seo-specialist | Technical SEO, structured data, Core Web Vitals | Site audits and SEO remediation |
 
 ## Agent Orchestration
 
@@ -149,14 +224,13 @@ Troubleshoot failures: check test isolation → verify mocks → fix implementat
 ## Project Structure
 
 ```
-agents/          — 63 specialized subagents
-skills/          — 251 workflow skills and domain knowledge
+agents/          — 65 specialized subagents
+skills/          — 198 workflow skills and domain knowledge (ecc/ + pmo-artifact/)
 commands/        — 79 slash commands
 hooks/           — Trigger-based automations
-rules/           — Always-follow guidelines (common + per-language)
-scripts/         — Cross-platform Node.js utilities
-mcp-configs/     — 14 MCP server configurations
-tests/           — Test suite
+rules/           — Always-follow guidelines (common + per-language, under rules/ecc/)
+scripts/         — Cross-platform Node.js utilities and hook implementations
+mcp-configs/     — MCP server configurations (29 servers in mcp-servers.json)
 ```
 
 `commands/` remains in the repo for compatibility, but the long-term direction is skills-first.
