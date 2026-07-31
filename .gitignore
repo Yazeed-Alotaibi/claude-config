@@ -44,6 +44,10 @@ projects/**
 shell-snapshots/
 # أقفال IDE — تحتوي على authToken و PID
 /ide/
+# مخرجات تشخيصية لسطر الحالة (تحتوي معرّف الجلسة والتكلفة)
+.statusline-last.json
+# مولّد تلقائياً، يحتوي مسار claude.exe الخاص بالجهاز
+/chrome/
 
 # ===== حالة عملية daemon الخاصة بالجهاز (ليست إعدادات محمولة) =====
 .claude.json
