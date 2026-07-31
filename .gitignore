@@ -49,6 +49,11 @@ shell-snapshots/
 # مولّد تلقائياً، يحتوي مسار claude.exe الخاص بالجهاز
 /chrome/
 
+# ===== سكيلز مثبّتة عبر `npx skills add` =====
+# روابط رمزية إلى ~/.agents/skills بمسار مطلق — تنكسر على الأجهزة الأخرى.
+# ثبّتها على كل جهاز بـ: npx skills add mvanhorn/last30days-skill -g
+/skills/last30days
+
 # ===== حالة عملية daemon الخاصة بالجهاز (ليست إعدادات محمولة) =====
 .claude.json
 /daemon*
