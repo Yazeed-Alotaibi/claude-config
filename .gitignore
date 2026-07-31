@@ -43,6 +43,17 @@ projects/**
 .serena/
 shell-snapshots/
 
+# ===== حالة عملية daemon الخاصة بالجهاز (ليست إعدادات محمولة) =====
+.claude.json
+daemon-auth-cooldown
+daemon-auth-status.json
+daemon.log
+/daemon/
+/jobs/
+plugins/.last_inuse_sweep
+plugins/plugin-catalog-cache.json
+plugins/installed_plugins.json
+
 # ===== نظام التشغيل =====
 Thumbs.db
 .DS_Store
