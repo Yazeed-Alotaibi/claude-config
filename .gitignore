@@ -45,14 +45,13 @@ shell-snapshots/
 
 # ===== حالة عملية daemon الخاصة بالجهاز (ليست إعدادات محمولة) =====
 .claude.json
-daemon-auth-cooldown
-daemon-auth-status.json
-daemon.log
-/daemon/
+/daemon*
 /jobs/
 plugins/.last_inuse_sweep
 plugins/plugin-catalog-cache.json
 plugins/installed_plugins.json
+# مسارات مطلقة + طوابع زمنية متغيرة؛ المصدر الحقيقي في settings.json
+plugins/known_marketplaces.json
 
 # ===== نظام التشغيل =====
 Thumbs.db

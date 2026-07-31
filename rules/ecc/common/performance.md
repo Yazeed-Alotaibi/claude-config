@@ -2,20 +2,33 @@
 
 ## Model Selection Strategy
 
-**Haiku 4.5** (90% of Sonnet capability, 3x cost savings):
-- Lightweight agents with frequent invocation
-- Pair programming and code generation
-- Worker agents in multi-agent systems
+Current generation is the **Claude 5 family**. Use these model IDs in agent
+frontmatter (`model:`) and CLI flags:
 
-**Sonnet 4.6** (Best coding model):
-- Main development work
-- Orchestrating multi-agent workflows
-- Complex coding tasks
+| Tier | Model ID | Use for |
+|------|----------|---------|
+| Haiku | `claude-haiku-4-5-20251001` | Lightweight agents invoked frequently, worker agents in multi-agent systems, high-volume simple tasks |
+| Sonnet | `claude-sonnet-5` | Main development work, orchestrating multi-agent workflows, most coding tasks |
+| Opus | `claude-opus-5` | Complex architectural decisions, deepest reasoning, research and analysis. 1M context window |
 
-**Opus 4.5** (Deepest reasoning):
-- Complex architectural decisions
-- Maximum reasoning requirements
-- Research and analysis tasks
+`claude-fable-5` also exists in the Claude 5 family; check current docs before
+assigning it to an agent.
+
+Cost scales with capability — default to the cheapest tier that reliably does
+the job, and reserve Opus for work that genuinely needs the reasoning depth or
+the larger context window.
+
+When building AI applications, default to the latest and most capable Claude
+models rather than pinning old versions.
+
+### Fast Mode
+
+Fast mode trades cost for lower latency using Claude Opus with faster output —
+it does **not** downgrade to a smaller model.
+
+- Toggle with `/fast`
+- Available on Opus 5, 4.8, and 4.7
+- Useful for interactive iteration where wall-clock latency dominates
 
 ## Context Window Management
 
