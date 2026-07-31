@@ -46,5 +46,6 @@
     }
   },
   "autoUpdatesChannel": "latest",
-  "theme": "dark"
+  "theme": "dark",
+  "effortLevel": "medium"
 }
