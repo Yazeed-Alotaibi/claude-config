@@ -94,7 +94,8 @@ Call `mcp__claude_ai_OpenRouter__send-message`. Always set:
 - `model` — from the chain above
 - `max_tokens` — always; bound the response explicitly
 - `timeout_ms` — 90000 normal, 180000 for large generations
-- **No `reasoning_effort`** on the primary (see above)
+- **`reasoning_effort: "low"`** on the primary — required (see above). Omit it
+  only on the base `deepseek/deepseek-v4-flash` revision, where handling is inverted
 
 Prefer one round-trip. A second refining pass is acceptable here — unlike the
 free tier, this model holds up across a couple of exchanges — but stop at two.
