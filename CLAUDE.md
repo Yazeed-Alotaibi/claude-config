@@ -131,3 +131,23 @@ rtk init --global       # Add RTK to ~/.claude/CLAUDE.md
 
 Overall average: **60-90% token reduction** on common development operations.
 <!-- /rtk-instructions -->
+
+# Claude Config Sync (~/.claude git repo)
+
+`~/.claude` is a git repo synced across devices via `https://github.com/Yazeed-Alotaibi/claude-config.git`.
+
+When the user types exactly **"claude pull"** in chat (any session, any project), run in `~/.claude`:
+```bash
+git pull
+```
+Report what changed (files touched, or "already up to date").
+
+When the user types exactly **"claude push"** in chat, run in `~/.claude`:
+```bash
+git add -A
+git commit -m "update: <short description of what changed>"
+git push
+```
+If there's nothing to commit, just say so — don't push an empty commit.
+
+Never run these two commands for any other repo unless the user is explicitly working inside `~/.claude`.
