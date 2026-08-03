@@ -6,31 +6,31 @@ Yazeed just built a PM tools portfolio site (`yazeed-website/` folder: `index.ht
 ## Approach
 
 ### Phase 1: Create Netlify site and get deployment
-1. Go to **netlify.com** → Sign up with email (or login if exists)
-2. Click **"Add new site"** → **"Deploy manually"**
-3. Open File Explorer → navigate to `C:\Users\yazot\Documents\yazeed-website`
+1. Go to **netlify.com** â†’ Sign up with email (or login if exists)
+2. Click **"Add new site"** â†’ **"Deploy manually"**
+3. Open File Explorer â†’ navigate to `C:\Users\PC\Documents\yazeed-website`
 4. Drag the entire `yazeed-website` folder into Netlify's upload box
 5. Netlify builds and assigns a temporary URL (e.g., `shiny-fox-123.netlify.app`)
    - **Site is live and testable at this URL**
    - Click the live URL to verify: homepage loads, calculator link works, "Coming soon" cards visible
 
 ### Phase 2: Connect yazeed.blog domain in Netlify
-1. In Netlify dashboard: **Site settings** → **Domain management** → **Add a domain**
-2. Type `yazeed.blog` → click **"Add domain"**
+1. In Netlify dashboard: **Site settings** â†’ **Domain management** â†’ **Add a domain**
+2. Type `yazeed.blog` â†’ click **"Add domain"**
 3. Netlify shows a message "Waiting for your nameserver update"
 4. Netlify displays **4 nameservers** (e.g., `dns1.p04.nsone.net`, `dns2.p04.nsone.net`, etc.)
    - **Copy these 4 nameserver addresses**
 
 ### Phase 3: Update Hostinger nameservers
 1. Login to Hostinger control panel (hostinger.com)
-2. Find **Domains** → **My Domains** → click `yazeed.blog`
+2. Find **Domains** â†’ **My Domains** â†’ click `yazeed.blog`
 3. Look for **Nameservers** or **DNS Management** section
 4. Replace existing nameservers with Netlify's 4 nameservers:
    - Delete the default Hostinger nameservers
    - Paste Netlify's 4 nameservers
    - Click **Save**
-5. Wait for propagation (usually 15 min – 1 hour, max 24 hours)
-   - Check status in Netlify: go back to **Domain management** — it will say "DNS ok" when ready
+5. Wait for propagation (usually 15 min â€“ 1 hour, max 24 hours)
+   - Check status in Netlify: go back to **Domain management** â€” it will say "DNS ok" when ready
    - Test: navigate to `https://yazeed.blog` in browser
 
 ### Phase 4: Verify site
@@ -42,11 +42,11 @@ Yazeed just built a PM tools portfolio site (`yazeed-website/` folder: `index.ht
 - Mobile layout responsive at 375px
 
 ## Files involved
-- **Source**: `C:\Users\yazot\Documents\yazeed-website\`
-  - `index.html` — homepage (14 domains, 33 calculators, 99 metrics hero; 4 tool cards)
-  - `pm-calculation-desk.html` — calculator (self-contained, 122,694 bytes)
+- **Source**: `C:\Users\PC\Documents\yazeed-website\`
+  - `index.html` â€” homepage (14 domains, 33 calculators, 99 metrics hero; 4 tool cards)
+  - `pm-calculation-desk.html` â€” calculator (self-contained, 122,694 bytes)
 - **Deployed to**: Netlify (free tier, unlimited bandwidth)
-- **Domain**: `yazeed.blog` → Netlify nameservers
+- **Domain**: `yazeed.blog` â†’ Netlify nameservers
 
 ## Critical UI elements to verify
 - [ ] Homepage hero text and stats display correctly
@@ -61,7 +61,7 @@ Yazeed just built a PM tools portfolio site (`yazeed-website/` folder: `index.ht
 ## Verification
 After deployment:
 1. `yazeed.blog` loads in browser
-2. Click "Open tool" → PM Calculation Desk loads
+2. Click "Open tool" â†’ PM Calculation Desk loads
 3. Test 1-2 calculators (e.g., EVA or PERT) to confirm formulas compute
 4. Mobile view: topbar compact, cards stack vertically, no horizontal overflow
 5. Console: no JavaScript errors

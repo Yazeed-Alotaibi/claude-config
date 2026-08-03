@@ -68,3 +68,16 @@ plugins/known_marketplaces.json
 # ===== نظام التشغيل =====
 Thumbs.db
 .DS_Store
+
+# ===== إضافات جهاز جديد (2026-08-03) =====
+# سجلات وقت التشغيل ومقاييس خاصة بالجهاز
+bash-commands.log
+cost-tracker.log
+metrics/
+session-data/
+# ذاكرة مؤقتة لشريط الحالة claude-hud (ملفات hash خاصة بالجهاز)
+plugins/claude-hud/
+# نسخ احتياطية محلية لملف الإعدادات
+settings.json.bak*
+settings.json.original
+*.bak

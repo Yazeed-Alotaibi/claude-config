@@ -4,13 +4,13 @@
     {
       "name": "pm-calculations",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "http-server", "C:/Users/yazot/Documents/pm-calculations", "-p", "4573", "-c-1", "--silent"],
+      "runtimeArgs": ["--yes", "http-server", "C:/Users/PC/Documents/pm-calculations", "-p", "4573", "-c-1", "--silent"],
       "port": 4573
     },
     {
       "name": "yazeed-website",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "http-server", "C:/Users/yazot/Documents/yazeed-website", "-p", "4574", "-c-1", "--silent"],
+      "runtimeArgs": ["--yes", "http-server", "C:/Users/PC/Documents/yazeed-website", "-p", "4574", "-c-1", "--silent"],
       "port": 4574
     }
   ]
