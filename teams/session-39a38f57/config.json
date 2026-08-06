@@ -1,0 +1,18 @@
+{
+  "name": "session-39a38f57",
+  "createdAt": 1786012149337,
+  "leadAgentId": "team-lead@session-39a38f57",
+  "leadSessionId": "39a38f57-c933-490f-af95-26834d1d55c4",
+  "members": [
+    {
+      "agentId": "team-lead@session-39a38f57",
+      "name": "team-lead",
+      "agentType": "team-lead",
+      "joinedAt": 1786012149337,
+      "tmuxPaneId": "leader",
+      "cwd": "C:\\Windows\\System32",
+      "subscriptions": [],
+      "backendType": "in-process"
+    }
+  ]
+}
