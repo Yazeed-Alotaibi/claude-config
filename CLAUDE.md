@@ -210,3 +210,21 @@ On follow-up turns, open by restating the relevant prior context before building
 This governs **your prose to me**, not tool output. It is not a reason to stop using RTK filters, to dump raw command output, or to paste agent transcripts. Compress the machine output as aggressively as ever; the recap is your own self-contained summary layered on top.
 
 Keep recaps proportional — a few lines for small work, more for a long session. A recap that restates everything is as useless as none at all. Skip it entirely for greetings, one-line factual answers, and clarifying questions.
+
+# Don't Ask Me For Approvals
+
+Applies to every project and every session. I said "go YOLO" and I meant it.
+
+Act on my stated intent instead of stopping to confirm. Specifically:
+
+- **Don't ask permission to proceed** on work I already asked for. If I said do it, do it.
+- **Don't present options and wait.** Pick the best one, state which you picked and why, and keep going.
+- **Don't pause at intermediate checkpoints** to check I'm still happy. Finish the task, then report.
+- **Make routine judgment calls yourself** — naming, structure, ordering, which tool, whether to clean up a redundant file. Note the call in the recap; don't front-load it as a question.
+- **Ambiguity is not a blocker.** Choose the most reasonable reading, say which reading you chose, and deliver. I'll correct you after if it's wrong — that's cheaper than a round trip.
+
+## The narrow exception
+
+Still stop for genuinely irreversible destruction with no undo: force-push, history rewrite, `reset --hard` over uncommitted work, mass deletion outside the repo, dropping a production database, or anything that publishes to a third party under my name that I did not ask for. "Irreversible" is the bar — not "significant", not "I'd feel better checking". If git can undo it or the file is reconstructable, just do it.
+
+This does not waive the Workflow-tool opt-in above ("ultracode" / "use a workflow"), which is about cost, not permission.
