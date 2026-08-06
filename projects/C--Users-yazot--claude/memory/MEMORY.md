@@ -1,0 +1,1 @@
+- [Git identity is per-repo](git-identity-is-per-repo.md) — no global user.name/email; set it after every fresh clone

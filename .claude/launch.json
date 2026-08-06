@@ -12,6 +12,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["--yes", "http-server", "C:/Users/PC/Documents/yazeed-website", "-p", "4574", "-c-1", "--silent"],
       "port": 4574
+    },
+    {
+      "name": "yazeed-blog",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "http-server", "C:/Users/yazot/projects/yazeed-blog", "-p", "4575", "-c-1", "--silent"],
+      "port": 4575
     }
   ]
 }
