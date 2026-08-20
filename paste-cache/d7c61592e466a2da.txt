@@ -1,0 +1,111 @@
+That's the missing font — four warnings because window_frame requests Lilex too. Let me find the right package.
+
+  Ran 2 shell commands
+
+winget doesn't carry Lilex — only JetBrainsMono. I'll pull Lilex straight from the Nerd Fonts release so your config works as written, no edits needed.
+
+  Ran 3 shell commands
+
+Fixed — WezTerm now resolves Lilex, zero font warnings.
+
+What I did: winget doesn't carry Lilex (only JetBrainsMono), so I pulled Lilex.zip from the Nerd Fonts latest release and installed the 10 Mono variants per-user:
+
+- Files → %LOCALAPPDATA%\Microsoft\Windows\Fonts
+- Registered under HKCU\...\CurrentVersion\Fonts, reading each display name from the file's own metadata rather than guessing from the filename — that's what makes the family resolve as Lilex Nerd Font Mono exactly as your config spells it
+
+No admin needed, no config edit needed, and it's user-scope so it doesn't touch the system font store.
+
+Font stack now resolves as:
+Lilex Nerd Font Mono      ← Gdi, imported to RAM
+Symbols Nerd Font Mono    ← built-in
+JetBrains Mono            ← built-in
+
+I installed the Italic variants too, which matters here — your window_frame block requests style='Italic', and that was one of the four warnings you saw. Regular alone would have left it synthesizing a fake italic.
+
+Restart WezTerm to pick it up — a running instance caches its font set, so CTRL+SHIFT+R alone may not clear the warning.
+
+Two of the config's fallbacks are still missing (SauceCodePro, FiraCode), but those never warn — WezTerm only complains about the primary. Nothing to do unless you want them.
+
+✻ Crunched for 1m 34s
+
+> /stickers
+  ⎿  Opening sticker page in browser…
+
+> WHAT COMMAND IS IN WEZ
+
+  Ran 1 shell command
+
+Here's every binding your config defines, pulled from the live keymap:
+
+Panes
+
+┌───────────┬──────────────────────────┐
+│    Key    │          Action          │
+├───────────┼──────────────────────────┤
+│ ALT+Enter │ Split right (even 50/50) │
+├───────────┼──────────────────────────┤
+│ ALT+\     │ Split down (even 50/50)  │
+├───────────┼──────────────────────────┤
+│ ALT+-     │ Split right, 30%         │
+├───────────┼──────────────────────────┤
+│ ALT+=     │ Split down, 30%          │
+├───────────┼──────────────────────────┤
+│ ALT+←↑→↓  │ Move focus between panes │
+├───────────┼──────────────────────────┤
+│ ALT+w     │ Close pane (asks first)  │
+└───────────┴──────────────────────────┘
+
+Tabs
+
+┌─────────────────┬──────────────────────────────┐
+│       Key       │            Action            │
+├─────────────────┼──────────────────────────────┤
+│ ALT+t           │ New tab                      │
+├─────────────────┼──────────────────────────────┤
+│ ALT+q           │ Close tab (asks first)       │
+├─────────────────┼──────────────────────────────┤
+│ ALT+1…8         │ Jump to tab 1–8              │
+├─────────────────┼──────────────────────────────┤
+│ CTRL+ALT+1…8    │ Move current tab to slot 1–8 │
+├─────────────────┼──────────────────────────────┤
+│ CTRL+ALT+← / →  │ Shift tab left / right       │
+├─────────────────┼──────────────────────────────┤
+│ CTRL+ALT+↑ or ↓ │ Last used tab                │
+└─────────────────┴──────────────────────────────┘
+
+Clipboard
+
+┌────────────────────┬─────────────────────────────┐
+│        Key         │           Action            │
+├────────────────────┼─────────────────────────────┤
+│ ALT+c              │ Copy                        │
+├────────────────────┼─────────────────────────────┤
+│ ALT+v              │ Paste                       │
+├────────────────────┼─────────────────────────────┤
+│ Right-click        │ Copy selection              │
+├────────────────────┼─────────────────────────────┤
+│ Middle-click       │ Split right                 │
+├────────────────────┼─────────────────────────────┤
+│ SHIFT+middle-click │ Close pane, no confirmation │
+└────────────────────┴─────────────────────────────┘
+
+Font size
+
+┌────────┬─────────────────────────────────────────┐
+│  Key   │                 Action                  │
+├────────┼─────────────────────────────────────────┤
+│ ALT++  │ Bigger                                  │
+├────────┼─────────────────────────────────────────┤
+│ ALT+*  │ Reset                                   │
+├────────┼─────────────────────────────────────────┤
+│ CTRL+- │ Smaller — built-in, not from the config │
+└────────┴─────────────────────────────────────────┘
+
+That last row is the collision we fixed: ALT+- is now the 30% split, so zoom-out lives on CTRL+-.
+
+Two things to watch out for, both from upstream:
+
+1. Right-click copies instead of pasting. Standard Windows terminal muscle memory pastes on right-click. Here it copies the selection, and there's no right-click paste — use ALT+v or CTRL+SHIFT+V.
+2. SHIFT+middle-click kills a pane with confirm=false. No dialog, no undo. Easy to hit by accident while scrolling.
+
+Say the word if you want either rebound.

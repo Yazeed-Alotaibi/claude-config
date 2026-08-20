@@ -1,0 +1,1 @@
+- [Prefers mouse navigation](prefers-mouse-navigation.md) — clicks menus instead of arrow keys; fullscreen TUI enabled via CLAUDE_CODE_NO_FLICKER=1

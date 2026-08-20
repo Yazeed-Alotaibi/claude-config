@@ -1,0 +1,15 @@
+PS C:\Windows\system32> & C:\Users\PC\AppData\Local\Temp\claude\C--Users-PC\ab2a7431-7d98-4736-b68e-354cf7454a5f\scratchpad\setup-ssh-tailsca
+>>   le.ps1
+& : The term 'C:\Users\PC\AppData\Local\Temp\claude\C--Users-PC\ab2a7431-7d98-4736-b68e-354cf7454a5f\scratchpad\setup-ssh-tailsca' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:3
++ & C:\Users\PC\AppData\Local\Temp\claude\C--Users-PC\ab2a7431-7d98-473 ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\PC\App...tup-ssh-tailsca:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+le.ps1 : The term 'le.ps1' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+At line:2 char:3
++   le.ps1
++   ~~~~~~
+    + CategoryInfo          : ObjectNotFound: (le.ps1:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException

@@ -1,0 +1,9 @@
+{
+  "id": "4",
+  "subject": "Synthesize Phase 3 summary table and Phase 4 consolidation",
+  "description": "After all 15 chunks are evaluated and merged into results.json, build the Phase 3 summary table and Phase 4 consolidation recommendations per the skill-stocktake spec.",
+  "activeForm": "Synthesizing stocktake summary",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

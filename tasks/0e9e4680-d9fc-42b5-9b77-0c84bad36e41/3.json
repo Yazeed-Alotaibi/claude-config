@@ -1,0 +1,9 @@
+{
+  "id": "3",
+  "subject": "Chunk 11-15: evaluate skills 201-282",
+  "description": "Dispatch 5 parallel background agents, each evaluating one 20-skill chunk (skills 201-282 of 282, last chunk is 2 skills) against the skill-stocktake checklist. Save verdicts to results.json.",
+  "activeForm": "Evaluating skill chunks 11-15",
+  "status": "pending",
+  "blocks": [],
+  "blockedBy": []
+}

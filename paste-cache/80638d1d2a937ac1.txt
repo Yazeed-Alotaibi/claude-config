@@ -1,0 +1,23 @@
+Unable to load a font specified by your font=wezterm.font('Lilex Nerd Font
+Mono', {weight="Regular", stretch='Normal', style=Normal}) configuration.
+Fallback(s) are being used instead, and the terminal may not render as
+intended. See https://wezfurlong.org/wezterm/config/fonts.html for more
+information
+
+Unable to load a font specified by your font=wezterm.font('Lilex Nerd Font
+Mono', {weight="Regular", stretch='Normal', style=Normal}) configuration.
+Fallback(s) are being used instead, and the terminal may not render as
+intended. See https://wezfurlong.org/wezterm/config/fonts.html for more
+information
+
+Unable to load a font specified by your font=wezterm.font('Lilex Nerd Font
+Mono', {weight="Regular", stretch='Normal', style=Normal}) configuration.
+Fallback(s) are being used instead, and the terminal may not render as
+intended. See https://wezfurlong.org/wezterm/config/fonts.html for more
+information
+
+Unable to load a font specified by your font=wezterm.font('Lilex Nerd Font
+Mono', {weight="Regular", stretch='Normal', style=Normal}) configuration.
+Fallback(s) are being used instead, and the terminal may not render as
+intended. See https://wezfurlong.org/wezterm/config/fonts.html for more
+information

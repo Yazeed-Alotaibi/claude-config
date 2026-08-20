@@ -1,0 +1,1 @@
+- [Prefers verified status recaps](prefers-verified-status-recaps.md) — recap each completed step with evidence, not vague success claims
