@@ -1,14 +1,109 @@
 {
-  "env": {},
-  "permissions": {
-    "allow": [
-      "PowerShell"
-    ],
-    "defaultMode": "auto"
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "model": "opus[1m]",
   "hooks": {
-    "UserPromptSubmit": [
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude Notification; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Windows\\System32\\conhost.exe",
+            "args": [
+              "--headless",
+              "C:\\Windows\\System32\\cmd.exe",
+              "/d",
+              "/c",
+              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Windows\\System32\\conhost.exe",
+            "args": [
+              "--headless",
+              "C:\\Windows\\System32\\cmd.exe",
+              "/d",
+              "/c",
+              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Windows\\System32\\conhost.exe",
+            "args": [
+              "--headless",
+              "C:\\Windows\\System32\\cmd.exe",
+              "/d",
+              "/c",
+              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Windows\\System32\\conhost.exe",
+            "args": [
+              "--headless",
+              "C:\\Windows\\System32\\cmd.exe",
+              "/d",
+              "/c",
+              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude SessionEnd; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
       {
         "hooks": [
           {
@@ -42,6 +137,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude Stop; fi",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "StopFailure": [
@@ -57,6 +162,16 @@
               "/c",
               "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
             ],
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude StopFailure; fi",
             "timeout": 10
           }
         ]
@@ -116,9 +231,8 @@
         ]
       }
     ],
-    "PreToolUse": [
+    "UserPromptSubmit": [
       {
-        "matcher": "*",
         "hooks": [
           {
             "type": "command",
@@ -133,78 +247,13 @@
             "timeout": 10
           }
         ]
-      }
-    ],
-    "PostToolUse": [
+      },
       {
-        "matcher": "*",
+        "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "C:\\Windows\\System32\\conhost.exe",
-            "args": [
-              "--headless",
-              "C:\\Windows\\System32\\cmd.exe",
-              "/d",
-              "/c",
-              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
-            ],
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PostToolUseFailure": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "C:\\Windows\\System32\\conhost.exe",
-            "args": [
-              "--headless",
-              "C:\\Windows\\System32\\cmd.exe",
-              "/d",
-              "/c",
-              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
-            ],
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "C:\\Windows\\System32\\conhost.exe",
-            "args": [
-              "--headless",
-              "C:\\Windows\\System32\\cmd.exe",
-              "/d",
-              "/c",
-              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
-            ],
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "C:\\Windows\\System32\\conhost.exe",
-            "args": [
-              "--headless",
-              "C:\\Windows\\System32\\cmd.exe",
-              "/d",
-              "/c",
-              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
-            ],
+            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude UserPromptSubmit; fi",
             "timeout": 10
           }
         ]
@@ -216,11 +265,79 @@
     "command": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\PC\\.claude\\coralline\\statusline.ps1\"",
     "refreshInterval": 1
   },
-  "subagentStatusLine": {
-    "type": "command",
-    "command": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\PC\\.claude\\coralline\\statusline.ps1\" --subagent"
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "context7@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "ruflo-core@ruflo": true,
+    "ruflo-swarm@ruflo": true,
+    "ruflo-rag-memory@ruflo": true,
+    "ruflo-federation@ruflo": true,
+    "ruflo-graph-intelligence@ruflo": true,
+    "claude-md-management@claude-plugins-official": true,
+    "huggingface-skills@claude-plugins-official": true,
+    "ecc@ecc": true,
+    "unit-testing@claude-code-workflows": true,
+    "agent-orchestration@claude-code-workflows": true,
+    "agent-teams@claude-code-workflows": true,
+    "agent-browser@agent-browser": true,
+    "prompts.chat@prompts.chat": true,
+    "claude-hud@claude-hud": true,
+    "mattpocock-skills@claude-plugins-official": true,
+    "claude-mem@thedotmack": true,
+    "diagram-design@diagram-design": true
   },
   "extraKnownMarketplaces": {
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "ruflo": {
+      "source": {
+        "source": "github",
+        "repo": "ruvnet/ruflo"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/everything-claude-code"
+      }
+    },
+    "claude-code-workflows": {
+      "source": {
+        "source": "github",
+        "repo": "wshobson/agents"
+      }
+    },
+    "agent-browser": {
+      "source": {
+        "source": "github",
+        "repo": "vercel-labs/agent-browser"
+      }
+    },
+    "prompts.chat": {
+      "source": {
+        "source": "github",
+        "repo": "f/prompts.chat"
+      }
+    },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
+      }
+    },
     "diagram-design": {
       "source": {
         "source": "github",
@@ -229,13 +346,23 @@
     }
   },
   "effortLevel": "high",
+  "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "theme": "dark",
-  "editorMode": "normal",
-  "autoScrollEnabled": true,
+  "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "enabledPlugins": {
-    "diagram-design@diagram-design": true
-  }
+  "permissions": {
+    "allow": [
+      "PowerShell"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus[1m]",
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\PC\\.claude\\coralline\\statusline.ps1\" --subagent"
+  },
+  "editorMode": "normal",
+  "autoScrollEnabled": true
 }

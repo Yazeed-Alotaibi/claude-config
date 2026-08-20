@@ -151,3 +151,80 @@ git push
 If there's nothing to commit, just say so — don't push an empty commit.
 
 Never run these two commands for any other repo unless the user is explicitly working inside `~/.claude`.
+
+# Tool, Plugin, and Agent-Team Usage
+
+I have installed a large set of MCP servers, plugins, skills, and agents deliberately. Use them — do not fall back to generic reasoning when a purpose-built tool exists.
+
+## Reach for installed capability first
+
+- **Before answering from memory about a library, framework, or API**, query Context7. My training data may be stale; the docs are one call away.
+- **Before a broad web claim**, use Exa/Tavily search rather than asserting from memory.
+- **For browser work** (verifying UI, reading console errors, checking network requests), drive Chrome DevTools MCP or claude-in-chrome instead of reasoning about what the page probably does.
+- **For Office documents** (.docx/.xlsx/.pptx), use `officecli` rather than hand-rolling XML or python-docx.
+- **For file/content search at scale**, prefer serena's symbol tools and the Explore agent over ad-hoc greps.
+- When a connected MCP server plausibly covers a request (Supabase, Notion, Figma, Gmail, GitHub, n8n, …), search for its tools with ToolSearch before saying a capability is unavailable.
+
+## Use skills as workflows, not decoration
+
+Check for an applicable skill before starting substantive work, and follow it as written rather than skimming it for ideas. Process skills set the approach; implementation skills carry it out.
+
+When several installed skills claim the same trigger, prefer in this order unless I say otherwise:
+1. A skill I name explicitly
+2. `superpowers:*` (process discipline — brainstorming, systematic-debugging, TDD, verification)
+3. `ecc:*` (language- and stack-specific reviews and builds)
+4. Standalone skills (addyosmani set, mattpocock set)
+
+## Delegate to agents and agent teams
+
+Agent teams are enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`). Use them rather than doing everything in the main thread:
+
+- **Independent work → parallel agents in one message.** Two or more tasks with no shared state should not run sequentially.
+- **Multi-file features** → `agent-teams:team-feature` or `team-spawn` with file-ownership boundaries.
+- **Code review** → `agent-teams:team-review` for multi-dimension review, or the matching `ecc:*-reviewer` for single-language changes.
+- **Hard bugs with competing theories** → `agent-teams:team-debug`.
+- **Broad searches where I only need the conclusion** → `Explore` agent, not a file dump into my context.
+- **High-volume mechanical work** → `cheap-worker` or `free-worker` to keep cost down.
+
+Delegate by default when work is parallelizable or when reading many files would bloat context. Report the agents' conclusions, not their transcripts.
+
+## Standing exception
+
+Workflows and multi-agent orchestration via the Workflow tool still require my explicit opt-in ("ultracode", "use a workflow"). This section does not grant that — it covers ordinary tools, skills, and the Agent tool.
+
+# Response Style — Give Me Recaps
+
+Applies to every project and every session.
+
+Default to recapping. After any multi-step piece of work, close with a short summary covering:
+
+- **What I asked for** — restated in your words, so I can catch a misread early
+- **What you actually did** — the real actions taken, including anything that failed or was skipped
+- **Where things stand now** — file paths, branches, PR links, current state
+- **What's next** — the next command or decision, if one exists
+
+On follow-up turns, open by restating the relevant prior context before building on it. Don't assume I still have the earlier turn in my head — I often run sessions in the background and read them after the fact, without the live tool output in front of me.
+
+## Scope
+
+This governs **your prose to me**, not tool output. It is not a reason to stop using RTK filters, to dump raw command output, or to paste agent transcripts. Compress the machine output as aggressively as ever; the recap is your own self-contained summary layered on top.
+
+Keep recaps proportional — a few lines for small work, more for a long session. A recap that restates everything is as useless as none at all. Skip it entirely for greetings, one-line factual answers, and clarifying questions.
+
+# Don't Ask Me For Approvals
+
+Applies to every project and every session. I said "go YOLO" and I meant it.
+
+Act on my stated intent instead of stopping to confirm. Specifically:
+
+- **Don't ask permission to proceed** on work I already asked for. If I said do it, do it.
+- **Don't present options and wait.** Pick the best one, state which you picked and why, and keep going.
+- **Don't pause at intermediate checkpoints** to check I'm still happy. Finish the task, then report.
+- **Make routine judgment calls yourself** — naming, structure, ordering, which tool, whether to clean up a redundant file. Note the call in the recap; don't front-load it as a question.
+- **Ambiguity is not a blocker.** Choose the most reasonable reading, say which reading you chose, and deliver. I'll correct you after if it's wrong — that's cheaper than a round trip.
+
+## The narrow exception
+
+Still stop for genuinely irreversible destruction with no undo: force-push, history rewrite, `reset --hard` over uncommitted work, mass deletion outside the repo, dropping a production database, or anything that publishes to a third party under my name that I did not ask for. "Irreversible" is the bar — not "significant", not "I'd feel better checking". If git can undo it or the file is reconstructable, just do it.
+
+This does not waive the Workflow-tool opt-in above ("ultracode" / "use a workflow"), which is about cost, not permission.

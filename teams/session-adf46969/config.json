@@ -1,0 +1,18 @@
+{
+  "name": "session-adf46969",
+  "createdAt": 1786013065008,
+  "leadAgentId": "team-lead@session-adf46969",
+  "leadSessionId": "adf46969-9c3c-434d-924e-69f03ca3e800",
+  "members": [
+    {
+      "agentId": "team-lead@session-adf46969",
+      "name": "team-lead",
+      "agentType": "team-lead",
+      "joinedAt": 1786013065008,
+      "tmuxPaneId": "leader",
+      "cwd": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools",
+      "subscriptions": [],
+      "backendType": "in-process"
+    }
+  ]
+}
