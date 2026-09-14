@@ -1,0 +1,58 @@
+  Analyzing Contract Clauses
+  ### Executive Evaluation: Exceptional (Production-Grade)
+
+  This is an exceptionally well-crafted, rigorous operating contract. It reads like an RFC-grade specification rather than an ad-hoc system prompt. It strikes the exact balance needed for frontier models: airtight behavioral invariants without prescriptive micromanagement.
+  ──────
+  ### Key Strengths & Prompt-Engineering Highlights
+
+  1. Silence by Default for Classifications:
+  │ "Apply action and risk classifications internally. Surface them only when they materially affect the plan, authority, risk, or user decision."
+
+      • Why this matters: This completely prevents "taxonomic noise" where the agent prefaces simple answers with annoying classification headers.
+  2. Verification Loop Throttling:
+  │ "Do not repeat successful checks without a relevant intervening change."
+  │ "Run the smallest verification set... broader check once after the final changes."
+
+      • Why this matters: Prevents one of the most expensive token-burning loops in autonomous agents (re-running full test suites 4 times during minor formatting edits).
+  3. Opportunistic Defect Fixes with Strict Isolation:
+  │ "MAY fix a discovered defect only when the fix is clear, small, isolated, low-risk, and verifiable. Otherwise report it without expanding scope."
+
+      • Why this matters: Solves the classic dilemma between being helpful and causing scope creep or introducing regressions in unrelated code.
+  4. Self-Contained RTK & Codex Protocol:
+      • The RTK rule is reduced to 4 lines with a native fallback and self-discovery (rtk --help), eliminating ~100 lines of table bloat while ensuring the agent doesn't crash if an RTK filter is missing.
+      • The Git integrity clause cleanly handles the exception for ~/.Codex (git add -A) versus project repositories (focused atomic commits).
+
+  ──────
+  ### Surgical Observations & Potential Fine-Tuning
+
+  Here are three subtle areas to review before deploying:
+
+  #### 1. Automatic Local Commits (Preference Check)
+
+  • Current text:
+  │ "After requested repository changes pass relevant checks, create a focused local commit containing only task-owned files or hunks."
+
+  • Observation: As written, the agent MUST / WILL create a local git commit for every code change task once tests pass.
+  • Question: Do you want the agent to automatically create git commits on your branch after every task, or do you prefer it to keep changes in the working tree unless requested?
+  • If you prefer flexibility: Change to:
+  │ "After requested repository changes pass relevant checks, create a focused local commit containing only task-owned files or hunks when appropriate or requested."
+
+
+  #### 2. Subagent Contract Inheritance
+
+  • Observation: In multi-agent or subagent delegation workflows (e.g. research, self, or parallel agents), spawned subagents might not automatically read AGENTS.md unless instructed.
+  • Suggestion (Optional addition under Execution):
+  │ "Ensure delegated subagents or background tasks respect these same authority and isolation boundaries."
+
+
+  #### 3. Handling Broken Environments (Clean Baseline Principle)
+
+  • Current text under Execution:
+  │ "Record relevant repository and working-state baselines before editing. Preserve and work around pre-existing changes."
+
+  • Enhancement: If the user's workspace already has broken tests before the agent starts editing, agents often get stuck trying to fix pre-existing broken tests.
+  • Suggestion: Ensure the baseline step explicitly notes pre-existing test failures so the agent doesn't conflate user test failures with its own regressions.
+  ──────
+  ### Verdict
+
+  This draft is ready for production. If the automatic local commit behavior matches your preferred git workflow, you can deploy this directly to your AGENTS.md.

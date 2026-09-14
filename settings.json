@@ -2,6 +2,13 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+  "permissions": {
+    "allow": [
+      "PowerShell"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "claude-fable-5-1[1m]",
   "hooks": {
     "Notification": [
       {
@@ -123,22 +130,6 @@
     ],
     "Stop": [
       {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "C:\\Windows\\System32\\conhost.exe",
-            "args": [
-              "--headless",
-              "C:\\Windows\\System32\\cmd.exe",
-              "/d",
-              "/c",
-              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
-            ],
-            "timeout": 10
-          }
-        ]
-      },
-      {
         "matcher": "",
         "hooks": [
           {
@@ -147,9 +138,7 @@
             "timeout": 10
           }
         ]
-      }
-    ],
-    "StopFailure": [
+      },
       {
         "hooks": [
           {
@@ -165,13 +154,31 @@
             "timeout": 10
           }
         ]
-      },
+      }
+    ],
+    "StopFailure": [
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
             "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude StopFailure; fi",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Windows\\System32\\conhost.exe",
+            "args": [
+              "--headless",
+              "C:\\Windows\\System32\\cmd.exe",
+              "/d",
+              "/c",
+              "%USERPROFILE%\\.orca\\agent-hooks\\claude-hook.cmd"
+            ],
             "timeout": 10
           }
         ]
@@ -233,6 +240,16 @@
     ],
     "UserPromptSubmit": [
       {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude UserPromptSubmit; fi",
+            "timeout": 10
+          }
+        ]
+      },
+      {
         "hooks": [
           {
             "type": "command",
@@ -247,16 +264,6 @@
             "timeout": 10
           }
         ]
-      },
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "if [ -n \"$PASEO_TERMINAL_ID\" ]; then \"${PASEO_HOOK_CLI:-paseo}\" hooks claude UserPromptSubmit; fi",
-            "timeout": 10
-          }
-        ]
       }
     ]
   },
@@ -264,6 +271,10 @@
     "type": "command",
     "command": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\PC\\.claude\\coralline\\statusline.ps1\"",
     "refreshInterval": 1
+  },
+  "subagentStatusLine": {
+    "type": "command",
+    "command": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\PC\\.claude\\coralline\\statusline.ps1\" --subagent"
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
@@ -349,20 +360,16 @@
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
   "theme": "dark",
+  "editorMode": "normal",
+  "autoContinueAtUsageLimit": true,
+  "autoScrollEnabled": true,
+  "teammateMode": "in-process",
   "remoteControlAtStartup": false,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
-  "permissions": {
-    "allow": [
-      "PowerShell"
-    ],
-    "defaultMode": "auto"
-  },
-  "model": "opus[1m]",
-  "subagentStatusLine": {
-    "type": "command",
-    "command": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\PC\\.claude\\coralline\\statusline.ps1\" --subagent"
-  },
-  "editorMode": "normal",
-  "autoScrollEnabled": true
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "xhigh"
+    }
+  }
 }

@@ -1,0 +1,71 @@
+Yes. The stronger design is a Global Agent Operating Contract, not another collection of best-practice bullets.
+
+  ### Design section 1: Architecture
+
+  The contract would have three layers:
+
+  1. Operating kernel
+     A small set of durable invariants: protect user work, stay within authority, solve root causes, verify outcomes, and report honestly.
+
+  2. Decision protocol
+     Codex classifies each request by task mode and risk, then scales its behavior predictably.
+
+  3. Local protocols
+     A concise adaptive RTK rule and the exact Codex pull/Codex push workflow.
+
+  Request
+     ↓
+  Task mode → authorized actions
+     ↓
+  Risk level → planning, review, and verification depth
+     ↓
+  Execute → verify → definition of done
+     ↓
+  Focused commit when applicable → evidence-backed report
+
+  Task modes would be explicit:
+
+   Mode       Meaning
+  ━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Inspect    Answer, explain, review, diagnose, or plan without changing state
+  ─────────  ─────────────────────────────────────────────────────────────────────────────────────
+   Change     Build, fix, or modify in-scope local files
+  ─────────  ─────────────────────────────────────────────────────────────────────────────────────
+   Operate    Affect external systems, publish, deploy, purchase, or perform irreversible actions
+  ─────────  ─────────────────────────────────────────────────────────────────────────────────────
+   Monitor    Continue observing until a stated completion or stopping condition
+
+  Risk would control rigor:
+
+   Risk           Required rigor
+  ━━━━━━━━━━━━━  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Routine        Direct execution and targeted validation
+  ─────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+   Material       Visible plan, broader verification, and independent review where relevant
+  ─────────────  ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+   High-impact    Explicit risk analysis, rollback strategy, strong validation, and authorization for consequential actions
+
+  Every task would share one definition of done:
+
+  - The requested outcome is actually achieved.
+  - Verification covers the changed behavior and relevant risks.
+  - Checks remain valid after the final change.
+  - Pre-existing work is preserved.
+  - Task-owned changes are isolated.
+  - Remaining uncertainty is disclosed.
+  - “Complete” is never claimed merely because work stopped.
+
+  The contract would use MUST only for hard safety, authority, and integrity requirements; SHOULD for strong defaults; and MAY for optional optimizations. This makes priority clearer and prevents every preference from sounding equally absolute.
+
+  Why this is better:
+
+  - More consistent because decisions follow explicit modes and risk.
+  - More powerful because it defines authorization and completion, not merely preferred steps.
+  - More professional because requirements are testable and auditable.
+  - More durable because it describes outcomes rather than today’s tools.
+  - More concise because detailed procedures remain in skills, repositories, or tool help.
+  - Extensible: recurring failures can later become enforced rules or hooks without rewriting the kernel.
+
+  This follows OpenAI’s current guidance to keep authorization boundaries compact, state instructions once, and specify outcomes and success evidence rather than prescribing every step. Official OpenAI model guidance (https://developers.openai.com/api/docs/guides/latest-model)
+
+  Does this operating-contract architecture look right before I present the exact components and clauses?

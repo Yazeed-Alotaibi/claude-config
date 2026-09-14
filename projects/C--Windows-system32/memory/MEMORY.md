@@ -1,1 +1,2 @@
 - [Prefers verified status recaps](prefers-verified-status-recaps.md) — recap each completed step with evidence, not vague success claims
+- [claude-config settings.json cross-device merges](claude-config-settings-cross-device.md) — union the hooks, never pick a side; public repo
