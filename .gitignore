@@ -81,3 +81,7 @@ plugins/claude-hud/
 settings.json.bak*
 settings.json.original
 *.bak
+
+# ===== ضوضاء الجلسات (تتولد في كل تشغيل) =====
+paste-cache/
+teams/session-*/
